@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/Custom.css" rel="stylesheet" type="text/css" media="all">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -25,7 +26,65 @@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
-                @Html.Partial("_LoginPartial")
+                <button id="myBtn">Open Modal</button>
+                <div id="myModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <ul class="nav nav-tabs nav-justified">
+                            <li class="active"><a data-toggle="tab" href="#step1">Krok 1</a></li>
+                            <li><a data-toggle="tab" href="#step2">Krok 2</a></li>
+                            <li><a data-toggle="tab" href="#step3">Krok 3</a></li>
+                        </ul>
+                        <form action="~/Reservation/Index/" method="post">
+                            <div class="tab-content">
+                                <div id="step1" class="tab-pane fade in active">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row text-center">
+
+                                                <input type="text" placeholder="Imię" name="Name" />
+                                                <input type="text" placeholder="Nazwisko" name="LastName" />
+                                                <input type="text" placeholder="Adres E-mail" name="Email" />
+                                                <input type="text" placeholder="Numer telefonu" name="Phone" />
+                                                <a href="#step2" data-toggle="tab" class="btn btn-primary">Dalej</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="step2" class="tab-pane fade in">
+                                    <div class="row">
+                                        <div class="col-sm-9">
+                                            <div class="well">
+                                                @Html.CheckBox("Trolltunga") Troltunga <br />
+                                                @Html.CheckBox("Floyen") Floyen <br />
+                                                @Html.CheckBox("Ulriken") Ulriken <br />
+                                                @Html.CheckBox("Flam") Flam <br />
+                                                @Html.CheckBox("TransportLotnistko") TransportLotnisko <br />
+                                                @Html.CheckBox("PływanieŁodzią") PływanieŁodzią <br />
+                                                @Html.CheckBox("Nocleg") Nocleg <br />
+                                                @Html.CheckBox("Lodowiec") Lodowiec <br />
+                                                @Html.CheckBox("ZwiedzanieBergen") ZwiedzanieBergen <br />
+                                                @Html.CheckBox("Wodospady") Wodospady <br />
+                                                <a href="#step3" data-toggle="tab" class="btn btn-primary">Dalej</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="step3" class="tab-pane fade in">
+                                    <div class="row">
+                                        <div class="col-sm-9">
+                                            <div class="well">
+                                                <textarea rows="4" cols="50" name="Comments" placeholder="Dodatkowe uwagi..."></textarea>
+                                            </div>
+                                            <button type="submit" class="btn">Wyślij</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    @Html.Partial("_LoginPartial")
+                </div>
             </div>
         </div>
     </div>
@@ -42,3 +101,31 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById('myModal');
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on the button, open the modal
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
