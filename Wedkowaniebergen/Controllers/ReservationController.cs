@@ -82,16 +82,13 @@ namespace Wedkowaniebergen.Controllers
 
             if (ModelState.IsValid)
             {
-                //do something
                 TempData["Success"] = "Rezerwacja powiodła się, wkrótce odezwiemy się do Ciebie.";
             }
             else
             {
-                ViewData["Error"] = "Rezerwacja nie powiodła się, spróbuj jeszcze raz.";
+                TempData["Error"] = "Rezerwacja nie powiodła się, spróbuj jeszcze raz.";
             }
             return View("~/Views/Home/Index.cshtml");
-
-            
         }
         
     }

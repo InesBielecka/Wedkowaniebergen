@@ -5,14 +5,14 @@
 <div class="jumbotron">
     @if (TempData["Success"] != null)
     {
-        <div class="green">
-            <p>@TempData["Success"].ToString()</p>
+        <div>
+            <p class="success">@TempData["Success"].ToString()</p>
         </div>
     }
-    @if (ViewData["Error"] != null)
+    @if (TempData["Error"] != null)
     {
-        <div class="red">
-            <p>@ViewData["Error"].ToString()</p>
+        <div>
+            <p>@TempData["Error"].ToString()</p>
         </div>
     }
     <h1>ASP.NET</h1>
