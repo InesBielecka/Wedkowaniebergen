@@ -13,13 +13,19 @@ namespace Wedkowaniebergen.Controllers
 {
     public class ReservationController : Controller
     {
+        [HttpGet]
+        public ActionResult Index()
+        {
+            return View();
+        }
 
         [HttpPost]
         [ActionName("Index")]
         public ActionResult Index(ReservationForm form)
         {
-
-            string ConString = ConfigurationManager.ConnectionStrings["LocalHost"].ConnectionString;
+            if (ModelState.IsValid)
+            {
+                string ConString = ConfigurationManager.ConnectionStrings["LocalHost"].ConnectionString;
             using (SqlConnection con = new SqlConnection(ConString))
             {
                 SqlCommand addcmd = new SqlCommand("NowaRezerwacja", con);
@@ -79,9 +85,6 @@ namespace Wedkowaniebergen.Controllers
                     ex2 = ex2.InnerException;
                 }
             }
-
-            if (ModelState.IsValid)
-            {
                 TempData["Success"] = "Rezerwacja powiodła się, wkrótce odezwiemy się do Ciebie.";
             }
             else
